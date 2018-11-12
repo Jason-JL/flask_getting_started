@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import numpy as np
 app = Flask(__name__)
 
 
@@ -38,18 +39,18 @@ def getName():
   Return the data dictionary of below to the caller as JSON 
   """
   data = {
-          "name": "Zisheng Liang"
+          "name": "Jason"
   }
   return jsonify(data)
 
 
 @app.route("/hello/<name>", methods=["GET"])
-def sayhello():
+def sayhello(name):
   """
   Returns the data dictionary of below to the caller as JSON
   """
   data = {
-    "message": "Hello there, <name>"         
+          "message": "Hello there, {}".format(name) 
   }
   return jsonify(data)
 
@@ -62,7 +63,7 @@ def getDistance():
   content = request.get_json()
   a = content['a']
   b = content['b']
-  distance = np.sqrt(np.power(a[0]-b[0], 2) + np.power(a[1]-b[0],2))
+  distance = np.sqrt(np.power(a[0]-b[0], 2) + np.power(a[1]-b[1],2))
   data = {
     "distance": distance,
     "a": [2, 4],
